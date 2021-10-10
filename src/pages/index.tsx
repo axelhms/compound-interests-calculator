@@ -1,32 +1,30 @@
-import { Box, Flex, Heading } from '@chakra-ui/layout';
-import { Button, FormControl, FormLabel, Input } from '@chakra-ui/react';
-import { Field, Form, Formik } from 'formik';
+import { Box, Flex } from '@chakra-ui/layout';
+import { Button, Table, Tbody, Td, Th, Thead, Tr } from '@chakra-ui/react';
+import { Form, Formik } from 'formik';
 import type { NextPage } from 'next';
-import React from 'react';
+import React, { useState } from 'react';
+import { CompoundInterest, ValuesType } from '../common/types';
 import InputField from '../components/InputField';
 import Layout from '../components/Layout';
-import Wrapper from '../components/Wrapper';
-
-interface Values {
-	initialInvestment: number;
-	interestRate: number;
-	term: number;
-}
+import { calculateInterest } from '../utils/calculateInterests';
 
 const Home: NextPage = () => {
-	const initialValues: Values = {
-		initialInvestment: 0,
-		interestRate: 0,
-		term: 0,
+	const initialValues: ValuesType = {
+		initialInvestment: 1000,
+		interestRate: 5,
+		period: 1,
+		monthlyContributions: 0,
 	};
+
+	const [result, updateResult] = useState<any>();
 
 	return (
 		<Layout>
 			<Formik
 				initialValues={initialValues}
 				onSubmit={(values, actions) => {
-					console.log({ values, actions });
-					alert(JSON.stringify(values, null, 2));
+					// Caster values en number
+					updateResult(calculateInterest(values));
 					actions.setSubmitting(false);
 				}}
 			>
@@ -46,7 +44,14 @@ const Home: NextPage = () => {
 					</Box>
 
 					<Box mt={4}>
-						<InputField name="term" label="Term (in years)" />
+						<InputField name="period" label="Period (in years)" />
+					</Box>
+
+					<Box mt={4}>
+						<InputField
+							name="monthlyContributions"
+							label="Monthly contributions (optional)"
+						/>
 					</Box>
 
 					<Flex>
@@ -56,6 +61,46 @@ const Home: NextPage = () => {
 					</Flex>
 				</Form>
 			</Formik>
+
+			{!result ? null : (
+				<Flex flexDirection="column">
+					<Box mt={4}>
+						In {result[result.length - 1].period}{' '}
+						{result[result.length - 1].period > 1
+							? 'years'
+							: 'year'}{' '}
+						you will have{' '}
+						{result[result.length - 1].futureInvestmentValue}€ of
+						which {result[result.length - 1].interestsEarned}€ comes
+						from interests.
+					</Box>
+
+					<Table mt={4}>
+						<Thead>
+							<Tr>
+								<Th>Year</Th>
+								<Th isNumeric>Interests earned</Th>
+								<Th isNumeric>Future investment value</Th>
+							</Tr>
+						</Thead>
+						<Tbody>
+							{result.map((interest: CompoundInterest) => {
+								return (
+									<Tr>
+										<Td>{interest.period}</Td>
+										<Td isNumeric>
+											{interest.interestsEarned}
+										</Td>
+										<Td isNumeric>
+											{interest.futureInvestmentValue}
+										</Td>
+									</Tr>
+								);
+							})}
+						</Tbody>
+					</Table>
+				</Flex>
+			)}
 		</Layout>
 	);
 };
