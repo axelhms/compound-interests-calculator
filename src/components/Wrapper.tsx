@@ -15,7 +15,7 @@ export const Wrapper: React.FC<WrapperProps> = ({
 
 	return (
 		<Flex
-			minHeight="100vh"
+			minHeight="88.5vh"
 			bgColor={colorMode === 'light' ? 'white' : 'dark'}
 			color={colorMode === 'light' ? 'dark' : 'white'}
 		>

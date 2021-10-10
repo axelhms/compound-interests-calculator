@@ -4,6 +4,7 @@ import { Field, Form, Formik } from 'formik';
 import type { NextPage } from 'next';
 import React from 'react';
 import InputField from '../components/InputField';
+import Layout from '../components/Layout';
 import Wrapper from '../components/Wrapper';
 
 interface Values {
@@ -20,8 +21,7 @@ const Home: NextPage = () => {
 	};
 
 	return (
-		<Wrapper variant="regular">
-			<Heading>Calculator</Heading>
+		<Layout>
 			<Formik
 				initialValues={initialValues}
 				onSubmit={(values, actions) => {
@@ -56,7 +56,7 @@ const Home: NextPage = () => {
 					</Flex>
 				</Form>
 			</Formik>
-		</Wrapper>
+		</Layout>
 	);
 };
 
