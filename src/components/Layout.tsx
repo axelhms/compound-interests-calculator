@@ -1,7 +1,7 @@
 import { Flex } from '@chakra-ui/layout';
 import React from 'react';
-import Navbar from './Navbar';
 import Wrapper, { WrapperVariant } from './Wrapper';
+import Navbar from './Navbar';
 
 interface LayoutProps {
 	variant?: WrapperVariant;

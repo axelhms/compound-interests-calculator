@@ -1,30 +1,31 @@
 {
-  "name": "compound-interests-calculator",
-  "version": "0.1.0",
-  "private": true,
-  "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start",
-    "lint": "next lint"
-  },
-  "dependencies": {
-    "@chakra-ui/icons": "^1.0.15",
-    "@chakra-ui/react": "^1.6.9",
-    "@emotion/react": "^11",
-    "@emotion/styled": "^11",
-    "@fontsource/open-sans": "^4.5.1",
-    "@fontsource/raleway": "^4.5.0",
-    "formik": "^2.2.9",
-    "framer-motion": "^4",
-    "next": "11.1.2",
-    "react": "17.0.2",
-    "react-dom": "17.0.2"
-  },
-  "devDependencies": {
-    "@types/react": "17.0.27",
-    "eslint": "8.0.0",
-    "eslint-config-next": "11.1.2",
-    "typescript": "4.4.3"
-  }
+	"name": "compound-interests-calculator",
+	"version": "0.1.0",
+	"private": true,
+	"scripts": {
+		"dev": "next dev",
+		"build": "next build",
+		"start": "next start",
+		"lint": "next lint"
+	},
+	"dependencies": {
+		"@chakra-ui/icons": "^1.0.15",
+		"@chakra-ui/react": "^1.6.9",
+		"@emotion/react": "^11",
+		"@emotion/styled": "^11",
+		"@fontsource/open-sans": "^4.5.1",
+		"@fontsource/raleway": "^4.5.0",
+		"formik": "^2.2.9",
+		"framer-motion": "^4",
+		"next": "11.1.2",
+		"react": "17.0.2",
+		"react-dom": "17.0.2"
+	},
+	"devDependencies": {
+		"@types/react": "17.0.27",
+		"eslint": "8.0.0",
+		"eslint-config-next": "11.1.2",
+		"typescript": "4.4.3"
+	},
+	"homepage": "https://axelhms.github.io/compound-interests-calculator"
 }
