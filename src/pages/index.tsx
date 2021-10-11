@@ -85,7 +85,7 @@ const Home: NextPage = () => {
 							comes from interests.
 						</Box>
 
-						<Box>
+						<Box overflowX="auto">
 							<Table m={4} mb={4}>
 								<Thead>
 									<Tr>

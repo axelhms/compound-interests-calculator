@@ -22,7 +22,7 @@ export const Navbar: React.FC<NavbarProps> = ({}) => {
 				bgGradient="linear-gradient(135deg, rgb(87, 112, 255) 0px, rgb(255, 117, 179) 60%, rgb(255, 124, 107) 100%)"
 			></Box>
 			<Flex
-				p={4}
+				p={5}
 				bgColor={colorMode === 'light' ? 'white' : 'darkItem'}
 				color={colorMode === 'light' ? 'dark' : 'white'}
 				shadow={colorMode === 'light' ? 'md' : 'none'}
