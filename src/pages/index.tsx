@@ -21,105 +21,132 @@ const Home: NextPage = () => {
 
 	return (
 		<Layout>
-			<Formik
-				initialValues={initialValues}
-				onSubmit={(values: any, actions: any) => {
-					if (values.monthlyContributions === 0) {
-						updateResult(calculateSimpleInterest(values));
-						actions.setSubmitting(false);
-					} else {
-						updateResult(calculateCompoundInterest(values));
-						actions.setSubmitting(false);
-					}
-				}}
-			>
-				<Form>
-					<Box mt={4}>
-						<InputField
-							name="initialInvestment"
-							label="Initial investment (in €)"
-						/>
-					</Box>
+			<Box mr={8} ml={8}>
+				<Formik
+					initialValues={initialValues}
+					onSubmit={(values: any, actions: any) => {
+						if (values.monthlyContributions === 0) {
+							updateResult(calculateSimpleInterest(values));
+							actions.setSubmitting(false);
+						} else {
+							updateResult(calculateCompoundInterest(values));
+							actions.setSubmitting(false);
+						}
+					}}
+				>
+					<Form>
+						<Box mt={4}>
+							<InputField
+								name="initialInvestment"
+								label="Initial investment (in €)"
+							/>
+						</Box>
 
-					<Box mt={4}>
-						<InputField
-							name="interestRate"
-							label="Interest rate (%)"
-						/>
-					</Box>
+						<Box mt={4}>
+							<InputField
+								name="interestRate"
+								label="Interest rate (%)"
+							/>
+						</Box>
 
-					<Box mt={4}>
-						<InputField name="period" label="Period (in years)" />
-					</Box>
+						<Box mt={4}>
+							<InputField
+								name="period"
+								label="Period (in years)"
+							/>
+						</Box>
 
-					<Box mt={4}>
-						<InputField
-							name="monthlyContributions"
-							label="Monthly contributions (in €)"
-						/>
-					</Box>
+						<Box mt={4}>
+							<InputField
+								name="monthlyContributions"
+								label="Monthly contributions (in €)"
+							/>
+						</Box>
 
-					<Flex>
-						<Button mt={4} ml="auto" type="submit">
-							Submit
-						</Button>
-					</Flex>
-				</Form>
-			</Formik>
+						<Flex>
+							<Button mt={4} ml="auto" type="submit">
+								Submit
+							</Button>
+						</Flex>
+					</Form>
+				</Formik>
 
-			{!result ? null : (
-				<Flex flexDirection="column" overflowX="auto">
-					<Box mt={4} mr="auto">
-						In {result[result.length - 1].period}{' '}
-						{result[result.length - 1].period > 1
-							? 'years'
-							: 'year'}{' '}
-						you will have{' '}
-						{result[result.length - 1].futureInvestmentValue}€ of
-						which {result[result.length - 1].totalInterestsEarned}€
-						comes from interests.
-					</Box>
+				{!result ? null : (
+					<Flex flexDirection="column">
+						<Box mt={4}>
+							In {result[result.length - 1].period}{' '}
+							{result[result.length - 1].period > 1
+								? 'years'
+								: 'year'}{' '}
+							you will have{'  '}
+							{result[result.length - 1].futureInvestmentValue}€
+							of which{' '}
+							{result[result.length - 1].totalInterestsEarned}€{' '}
+							comes from interests.
+						</Box>
 
-					<Table m={4} mb={4} variant="sm">
-						<Thead>
-							<Tr>
-								<Th>Year</Th>
-								{result[0].investedCapital &&
-								result[0].investedCapital !== 0 ? (
-									<Th isNumeric>Invested capital</Th>
-								) : null}
-								<Th isNumeric>Interests earned per year</Th>
-								<Th isNumeric>Total interests earned</Th>
-								<Th isNumeric>Future investment value</Th>
-							</Tr>
-						</Thead>
-						<Tbody>
-							{result.map((interest: CompoundInterest) => {
-								return (
+						<Box>
+							<Table m={4} mb={4}>
+								<Thead>
 									<Tr>
-										<Td>{interest.period}</Td>
+										<Th>Year</Th>
 										{result[0].investedCapital &&
 										result[0].investedCapital !== 0 ? (
-											<Td isNumeric>
-												{interest.investedCapital}
-											</Td>
+											<Th isNumeric>Invested capital</Th>
 										) : null}
-										<Td isNumeric>
-											{interest.interestsEarned}
-										</Td>
-										<Td isNumeric>
-											{interest.totalInterestsEarned}
-										</Td>
-										<Td isNumeric>
-											{interest.futureInvestmentValue}
-										</Td>
+										<Th isNumeric>
+											Interests earned per year
+										</Th>
+										<Th isNumeric>
+											Total interests earned
+										</Th>
+										<Th isNumeric>
+											Future investment value
+										</Th>
 									</Tr>
-								);
-							})}
-						</Tbody>
-					</Table>
-				</Flex>
-			)}
+								</Thead>
+								<Tbody>
+									{result.map(
+										(interest: CompoundInterest) => {
+											return (
+												<Tr>
+													<Td>{interest.period}</Td>
+													{result[0]
+														.investedCapital &&
+													result[0]
+														.investedCapital !==
+														0 ? (
+														<Td isNumeric>
+															{
+																interest.investedCapital
+															}
+														</Td>
+													) : null}
+													<Td isNumeric>
+														{
+															interest.interestsEarned
+														}
+													</Td>
+													<Td isNumeric>
+														{
+															interest.totalInterestsEarned
+														}
+													</Td>
+													<Td isNumeric>
+														{
+															interest.futureInvestmentValue
+														}
+													</Td>
+												</Tr>
+											);
+										}
+									)}
+								</Tbody>
+							</Table>
+						</Box>
+					</Flex>
+				)}
+			</Box>
 		</Layout>
 	);
 };
