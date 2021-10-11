@@ -32,7 +32,7 @@ const Home: NextPage = () => {
 		initialInvestment: 1000,
 		interestRate: 5,
 		period: 10,
-		monthlyContributions: 0,
+		monthlyContributions: 100,
 	};
 
 	const { colorMode } = useColorMode();
@@ -85,7 +85,7 @@ const Home: NextPage = () => {
 
 						<Flex>
 							<Button mt={4} ml="auto" type="submit">
-								Submit
+								Calculate
 							</Button>
 						</Flex>
 					</Form>
