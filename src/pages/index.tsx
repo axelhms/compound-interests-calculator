@@ -161,7 +161,7 @@ const Home: NextPage = () => {
 								</ResponsiveContainer>
 							</Box>
 							<Button
-								w="25%"
+								w="33%"
 								mr="auto"
 								ml="auto"
 								mt={4}
