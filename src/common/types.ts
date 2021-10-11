@@ -13,6 +13,8 @@ export interface ResultType {
 
 export interface CompoundInterest {
 	period: number;
+	investedCapital?: number;
 	interestsEarned: number;
+	totalInterestsEarned: number;
 	futureInvestmentValue: number;
 }

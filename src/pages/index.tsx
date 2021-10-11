@@ -6,13 +6,14 @@ import React, { useState } from 'react';
 import { CompoundInterest, ValuesType } from '../common/types';
 import InputField from '../components/InputField';
 import Layout from '../components/Layout';
-import { calculateInterest } from '../utils/calculateInterests';
+import { calculateCompoundInterest } from '../utils/calculateCompoundInterest';
+import { calculateSimpleInterest } from '../utils/calculateSimpleInterest';
 
 const Home: NextPage = () => {
 	const initialValues: ValuesType = {
 		initialInvestment: 1000,
 		interestRate: 5,
-		period: 1,
+		period: 10,
 		monthlyContributions: 0,
 	};
 
@@ -23,16 +24,23 @@ const Home: NextPage = () => {
 			<Formik
 				initialValues={initialValues}
 				onSubmit={(values, actions) => {
-					// Caster values en number
-					updateResult(calculateInterest(values));
-					actions.setSubmitting(false);
+					if (
+						values.monthlyContributions === 0 ||
+						values.monthlyContributions === ''
+					) {
+						updateResult(calculateSimpleInterest(values));
+						actions.setSubmitting(false);
+					} else {
+						updateResult(calculateCompoundInterest(values));
+						actions.setSubmitting(false);
+					}
 				}}
 			>
 				<Form>
 					<Box mt={4}>
 						<InputField
 							name="initialInvestment"
-							label="Initial investment"
+							label="Initial investment (in €)"
 						/>
 					</Box>
 
@@ -50,7 +58,7 @@ const Home: NextPage = () => {
 					<Box mt={4}>
 						<InputField
 							name="monthlyContributions"
-							label="Monthly contributions (optional)"
+							label="Monthly contributions (in €)"
 						/>
 					</Box>
 
@@ -71,15 +79,20 @@ const Home: NextPage = () => {
 							: 'year'}{' '}
 						you will have{' '}
 						{result[result.length - 1].futureInvestmentValue}€ of
-						which {result[result.length - 1].interestsEarned}€ comes
-						from interests.
+						which {result[result.length - 1].totalInterestsEarned}€
+						comes from interests.
 					</Box>
 
-					<Table mt={4}>
+					<Table mt={4} mb={4}>
 						<Thead>
 							<Tr>
 								<Th>Year</Th>
-								<Th isNumeric>Interests earned</Th>
+								{result[0].investedCapital &&
+								result[0].investedCapital !== 0 ? (
+									<Th isNumeric>Invested capital</Th>
+								) : null}
+								<Th isNumeric>Interests earned per year</Th>
+								<Th isNumeric>Total interests earned</Th>
 								<Th isNumeric>Future investment value</Th>
 							</Tr>
 						</Thead>
@@ -88,8 +101,17 @@ const Home: NextPage = () => {
 								return (
 									<Tr>
 										<Td>{interest.period}</Td>
+										{result[0].investedCapital &&
+										result[0].investedCapital !== 0 ? (
+											<Td isNumeric>
+												{interest.investedCapital}
+											</Td>
+										) : null}
 										<Td isNumeric>
 											{interest.interestsEarned}
+										</Td>
+										<Td isNumeric>
+											{interest.totalInterestsEarned}
 										</Td>
 										<Td isNumeric>
 											{interest.futureInvestmentValue}
