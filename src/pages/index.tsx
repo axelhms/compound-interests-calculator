@@ -24,10 +24,7 @@ const Home: NextPage = () => {
 			<Formik
 				initialValues={initialValues}
 				onSubmit={(values, actions) => {
-					if (
-						values.monthlyContributions === 0 ||
-						values.monthlyContributions === ''
-					) {
+					if (values.monthlyContributions === 0) {
 						updateResult(calculateSimpleInterest(values));
 						actions.setSubmitting(false);
 					} else {
