@@ -16,6 +16,7 @@ import {
 	Area,
 	AreaChart,
 	CartesianGrid,
+	ResponsiveContainer,
 	Tooltip,
 	XAxis,
 	YAxis,
@@ -97,7 +98,7 @@ const Home: NextPage = () => {
 							justifyContent="center"
 							flexDirection="column"
 						>
-							<Box mt={4}>
+							<Box mt={4} mb={4}>
 								In {result[result.length - 1].period}{' '}
 								{result[result.length - 1].period > 1
 									? 'years'
@@ -112,57 +113,58 @@ const Home: NextPage = () => {
 								€ comes from interests.
 							</Box>
 
-							<Box mt={4} mr="auto" ml="auto" mb={8}>
-								<AreaChart
-									width={800}
-									height={400}
-									data={result}
-									margin={{
-										top: 10,
-										right: 30,
-										left: 0,
-										bottom: 0,
-									}}
-								>
-									<CartesianGrid strokeDasharray="3 3" />
-									<XAxis
-										dataKey="period"
-										stroke={
-											colorMode === 'light'
-												? 'black'
-												: 'white'
-										}
-									/>
-									<YAxis
-										stroke={
-											colorMode === 'light'
-												? 'black'
-												: 'white'
-										}
-									/>
-									<Tooltip />
-									<Area
-										type="monotone"
-										dataKey="futureInvestmentValue"
-										name="Future investment value"
-										stackId="1"
-										stroke="#415EFF"
-										fill="#415EFF"
-									/>
-									<Area
-										type="monotone"
-										dataKey="investedCapital"
-										name="Invested capital"
-										stackId="2"
-										stroke="#ff00ff"
-										fill="#ff00ff"
-									/>
-								</AreaChart>
+							<Box>
+								<ResponsiveContainer width="99%" height={400}>
+									<AreaChart
+										data={result}
+										margin={{
+											top: 10,
+											right: 30,
+											left: 0,
+											bottom: 0,
+										}}
+									>
+										<CartesianGrid strokeDasharray="3 3" />
+										<XAxis
+											dataKey="period"
+											stroke={
+												colorMode === 'light'
+													? 'black'
+													: 'white'
+											}
+										/>
+										<YAxis
+											stroke={
+												colorMode === 'light'
+													? 'black'
+													: 'white'
+											}
+										/>
+										<Tooltip />
+										<Area
+											type="monotone"
+											dataKey="futureInvestmentValue"
+											name="Future investment value"
+											stackId="1"
+											stroke="#415EFF"
+											fill="#415EFF"
+										/>
+										<Area
+											type="monotone"
+											dataKey="investedCapital"
+											name="Invested capital"
+											stackId="2"
+											stroke="#ff00ff"
+											fill="#ff00ff"
+										/>
+									</AreaChart>
+								</ResponsiveContainer>
 							</Box>
 							<Button
 								w="25%"
 								mr="auto"
 								ml="auto"
+								mt={4}
 								mb={8}
 								onClick={() => {
 									updateShowTable(

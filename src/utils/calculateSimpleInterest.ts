@@ -13,8 +13,6 @@ export function calculateSimpleInterest({
 
 	interestRate = 1 + interestRate / 100;
 
-	console.log('simple');
-
 	for (let i: number = 1; i <= period; i++) {
 		let futureInvestmentResult =
 			futureInvestmentValue[i - 1] * interestRate;
