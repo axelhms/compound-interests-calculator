@@ -34,7 +34,7 @@ const Home: NextPage = () => {
 		monthlyContributions: 0,
 	};
 
-	const { colorMode, toggleColorMode } = useColorMode();
+	const { colorMode } = useColorMode();
 	const [result, updateResult] = useState<any>();
 	const [showTable, updateShowTable] = useState<boolean>(false);
 
