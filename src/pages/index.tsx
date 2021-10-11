@@ -23,7 +23,7 @@ const Home: NextPage = () => {
 		<Layout>
 			<Formik
 				initialValues={initialValues}
-				onSubmit={(values, actions) => {
+				onSubmit={(values: any, actions: any) => {
 					if (values.monthlyContributions === 0) {
 						updateResult(calculateSimpleInterest(values));
 						actions.setSubmitting(false);
@@ -68,8 +68,8 @@ const Home: NextPage = () => {
 			</Formik>
 
 			{!result ? null : (
-				<Flex flexDirection="column">
-					<Box mt={4}>
+				<Flex flexDirection="column" overflowX="auto">
+					<Box mt={4} mr="auto">
 						In {result[result.length - 1].period}{' '}
 						{result[result.length - 1].period > 1
 							? 'years'
@@ -80,7 +80,7 @@ const Home: NextPage = () => {
 						comes from interests.
 					</Box>
 
-					<Table mt={4} mb={4}>
+					<Table m={4} mb={4} variant="sm">
 						<Thead>
 							<Tr>
 								<Th>Year</Th>

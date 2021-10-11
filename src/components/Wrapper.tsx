@@ -18,6 +18,8 @@ export const Wrapper: React.FC<WrapperProps> = ({
 			minHeight="88.5vh"
 			bgColor={colorMode === 'light' ? 'white' : 'dark'}
 			color={colorMode === 'light' ? 'dark' : 'white'}
+			mr={8}
+			ml={8}
 		>
 			<Box
 				pt={8}
